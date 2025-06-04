@@ -20,7 +20,7 @@ Automates NoSave technique for GTA Online using firewall rules and process suspe
 - Windows OS
 - [AutoHotkey v1.1](https://www.autohotkey.com/)
 - [PsTools](https://download.sysinternals.com/files/PSTools.zip)
-- Extract to `System32` or set system PATH to it if extracted elsewhere
+- Extract PsTools.zip to `System32` or set system PATH to it if extracted elsewhere
 - Ensure `PsSuspend.exe` in `System32` or available in system PATH
 - Run script as Administrator
 

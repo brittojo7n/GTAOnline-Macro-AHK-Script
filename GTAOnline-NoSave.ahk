@@ -1,6 +1,8 @@
 #NoEnv
 #Persistent
 #SingleInstance Ignore
+#InstallKeybdHook
+#UseHook
 SendMode Input
 SetWorkingDir %A_ScriptDir%
 SetKeyDelay 0
@@ -49,6 +51,28 @@ return
 		ToolTip
 	}
 return
+
+ClickInterval := 25  ; Delay between clicks in ms
+Clicking := false
+
+<^F5::  ; Ctrl + F5 to toggle spam
+    Clicking := !Clicking
+    if (Clicking) {
+        Tooltip, L-Click Macro ON, 10, 10
+        SetTimer, SpamClick, %ClickInterval%
+    } else {
+        SetTimer, SpamClick, Off
+        Tooltip, L-Click Macro OFF, 10, 10
+        Sleep, 1000
+        Tooltip
+    }
+    Return
+
+SpamClick:
+    Click down
+    Sleep, 10
+    Click up
+    Return	
 
 AppExit()
 {

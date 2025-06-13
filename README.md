@@ -1,11 +1,10 @@
-# GTAOnline NoSaveAHK
-
-Automates NoSave technique for GTA Online using firewall rules and process suspension for private solo public sessions.
+# GTAOnline MacroScript
 
 ## Features
 
 - Blocks Rockstar server IP to enable NoSave mode (solo public lobby)
 - Suspends `GTA5.exe` process for 10 seconds to disconnect from other players
+- Toggles Left Click Macro for looting cash, gold, diamonds etc. in Heists
 - Easy toggling with keyboard shortcuts
 - Requires Administrator privileges
 
@@ -14,7 +13,7 @@ Automates NoSave technique for GTA Online using firewall rules and process suspe
 - **Ctrl + F9** — Enable NoSave mode (block Rockstar server IP)
 - **Ctrl + F12** — Disable NoSave mode (remove firewall block)
 - **Ctrl + F4** — Suspend GTA5.exe for 10 seconds (disconnect from others)
-- **Ctrl + F5** — Toggles Left Click Macro (used for Heists when looting cash, gold, diamonds etc.)
+- **Ctrl + F5** — Toggles Left Click Macro (use it for looting cash, gold, diamonds etc.)
   
 ## Requirements
 

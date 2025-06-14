@@ -52,7 +52,7 @@ return
 	}
 return
 
-ClickInterval := 25  ; Delay between clicks in ms
+ClickInterval := 100  ; Delay between clicks in ms
 Clicking := false
 
 <^F5::  ; Ctrl + F5 to toggle spam

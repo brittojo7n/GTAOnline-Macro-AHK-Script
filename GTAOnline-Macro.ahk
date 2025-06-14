@@ -52,27 +52,25 @@ return
 	}
 return
 
-ClickInterval := 100  ; Delay between clicks in ms
-Clicking := false
+Toggle = false
 
 <^F5::  ; Ctrl + F5 to toggle spam
-    Clicking := !Clicking
-    if (Clicking) {
-        Tooltip, L-Click Macro ON, 10, 10
-        SetTimer, SpamClick, %ClickInterval%
+    Toggle := !Toggle
+    if (Toggle) {
+        SetTimer, SpamClick, 10  ; Start the timer
     } else {
-        SetTimer, SpamClick, Off
-        Tooltip, L-Click Macro OFF, 10, 10
-        Sleep, 1000
-        Tooltip
+        SetTimer, SpamClick, Off  ; Stop the timer
     }
-    Return
+return
 
 SpamClick:
-    Click down
-    Sleep, 10
-    Click up
-    Return	
+    Click, down
+    Random, t, 4, 6
+    Sleep, t
+    Click, up
+    Random, r, 80, 90
+    Sleep, r
+return
 
 AppExit()
 {

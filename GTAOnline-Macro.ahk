@@ -54,12 +54,16 @@ return
 
 Toggle = false
 
-<^F5::  ; Ctrl + F5 to toggle spam
+<^F5::  
     Toggle := !Toggle
     if (Toggle) {
-        SetTimer, SpamClick, 10  ; Start the timer
+        SetTimer, SpamClick, 10 
+		ToolTip, AUTOCLICK ON, 10, 10
     } else {
-        SetTimer, SpamClick, Off  ; Stop the timer
+        SetTimer, SpamClick, Off 
+		ToolTip, AUTOCLICK OFF, 10, 10
+		Sleep 2000
+		ToolTip
     }
 return
 
@@ -78,3 +82,36 @@ AppExit()
 	RunWait, netsh advfirewall firewall delete rule name="%rule%", , Hide
 	RunWait, %ComSpec% /c "%suspend% -r %proc%", , Hide
 }
+
+afkKeys := ["w", "a", "s", "d"]  ; Movement keys
+interval := 240000               ; 4-minute interval
+holdTime := 300                  ; How long to hold a key (ms)
+isAFKActive := false
+
+<^F6:: ; Ctrl + F6 to toggle Anti-AFK
+	isAFKActive := !isAFKActive
+	if (isAFKActive) {
+		SetTimer, AntiAFK, %interval%
+		ToolTip, Anti-AFK ON, 10, 10
+	} else {
+		SetTimer, AntiAFK, Off
+		ToolTip, Anti-AFK OFF, 10, 10
+		SetTimer, RemoveAFKToolTip, 2000
+	}
+return
+
+RemoveAFKToolTip:
+	SetTimer, RemoveAFKToolTip, Off
+	ToolTip
+return
+
+AntiAFK:
+	IfWinActive, Grand Theft Auto V
+	{
+		Random, index, 1, 4
+		key := afkKeys[index]
+		Send {%key% down}
+		Sleep %holdTime%
+		Send {%key% up}
+	}
+return

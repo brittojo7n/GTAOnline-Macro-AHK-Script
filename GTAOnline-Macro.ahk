@@ -58,12 +58,12 @@ Toggle = false
     Toggle := !Toggle
     if (Toggle) {
         SetTimer, SpamClick, 10 
-		ToolTip, AUTOCLICK ON, 10, 10
+        ToolTip, AUTOCLICK ON, 10, 10
     } else {
         SetTimer, SpamClick, Off 
-		ToolTip, AUTOCLICK OFF, 10, 10
-		Sleep 2000
-		ToolTip
+        ToolTip, AUTOCLICK OFF, 10, 10
+        Sleep 2000
+        ToolTip
     }
 return
 
@@ -76,42 +76,32 @@ SpamClick:
     Sleep, r
 return
 
+ToggleRC := false
+
+<^F6::
+    ToggleRC := !ToggleRC
+    if (ToggleRC) {
+        ToolTip, RIGHT-CLICK AFK ON, 10, 10
+        SetTimer, SoftRightClick, 100
+    } else {
+        SetTimer, SoftRightClick, Off
+        ToolTip, RIGHT-CLICK AFK OFF, 10, 10
+        Sleep 2000
+        ToolTip
+    }
+return
+
+SoftRightClick:
+    Click, right down
+    Sleep, 1
+    Click, right up
+    Random, next, 10000, 20000
+    SetTimer, SoftRightClick, %next%
+return
+
 AppExit()
 {
 	global rule, proc, suspend
 	RunWait, netsh advfirewall firewall delete rule name="%rule%", , Hide
 	RunWait, %ComSpec% /c "%suspend% -r %proc%", , Hide
 }
-
-afkKeys := ["w", "a", "s", "d"]  ; Movement keys
-interval := 240000               ; 4-minute interval
-holdTime := 300                  ; How long to hold a key (ms)
-isAFKActive := false
-
-<^F6:: ; Ctrl + F6 to toggle Anti-AFK
-	isAFKActive := !isAFKActive
-	if (isAFKActive) {
-		SetTimer, AntiAFK, %interval%
-		ToolTip, Anti-AFK ON, 10, 10
-	} else {
-		SetTimer, AntiAFK, Off
-		ToolTip, Anti-AFK OFF, 10, 10
-		SetTimer, RemoveAFKToolTip, 2000
-	}
-return
-
-RemoveAFKToolTip:
-	SetTimer, RemoveAFKToolTip, Off
-	ToolTip
-return
-
-AntiAFK:
-	IfWinActive, Grand Theft Auto V
-	{
-		Random, index, 1, 4
-		key := afkKeys[index]
-		Send {%key% down}
-		Sleep %holdTime%
-		Send {%key% up}
-	}
-return

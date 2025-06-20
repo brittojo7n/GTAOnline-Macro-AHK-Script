@@ -14,6 +14,7 @@
 - **Ctrl + F12** — Disable NoSave mode (remove firewall block)
 - **Ctrl + F4** — Suspend GTA5.exe for 10 seconds (disconnect from others)
 - **Ctrl + F5** — Toggles Left Click Macro (use it for looting cash, gold, diamonds etc.)
+- **Ctrl + F6** — Toggles Left ANTI-AFK Macro (automates random movements using W,A,S,D preventing the player to go afk while online)
   
 ## Requirements
 
